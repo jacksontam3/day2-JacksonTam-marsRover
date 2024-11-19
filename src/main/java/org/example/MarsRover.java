@@ -13,5 +13,9 @@ public class MarsRover {
         this.direction = direction;
     }
 
+    public String showStatus() {
+        return this.x + ":" + this.y + ":" + this.direction;
+    }
+
 
 }
