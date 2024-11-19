@@ -158,5 +158,17 @@ public class MarsRoverTest {
         assertEquals("-1:0:W", report);
     }
 
+    @Test
+    public void should_move_forward_by_two_in_y_axis_when_orient_north_and_move_twice() {
+        //Given
+        MarsRover rover = new MarsRover(0,0,"N");
+        //When
+        rover.executeCommand("M");
+        rover.executeCommand("M");
+        String report = rover.showStatus();
+        //Then
+        assertEquals("0:2:N", report);
+    }
+
 
 }
