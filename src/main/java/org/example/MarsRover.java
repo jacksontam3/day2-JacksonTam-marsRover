@@ -50,6 +50,7 @@ public class MarsRover {
                         this.direction = "N";
                         break;
                 }
+                break;
             case "M":
                 switch (this.direction) {
                     case "N":
