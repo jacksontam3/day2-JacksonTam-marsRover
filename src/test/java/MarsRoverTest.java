@@ -192,5 +192,18 @@ public class MarsRoverTest {
         assertEquals("-1:0:E", report);
     }
 
+    @Test
+    public void should_move_backward_by_one_in_y_axis_when_orient_south(){
+        //Given
+        MarsRover rover = new MarsRover(0,0,"S");
+        //When
+        rover.executeCommand("B");
+        String report = rover.showStatus();
+        //Then
+        assertEquals("0:1:S", report);
+    }
+
+
+
 
 }
