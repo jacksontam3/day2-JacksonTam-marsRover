@@ -236,6 +236,17 @@ public class MarsRoverTest {
         assertEquals("0:0:N", report);
     }
 
+    @Test
+    public void should_handle_empty_command_string() {
+        //Given
+        MarsRover rover = new MarsRover(0, 0, "N");
+        //When
+        rover.executeCommand("");
+        String report = rover.showStatus();
+        //Then
+        assertEquals("0:0:N", report);
+    }
+
 
 
 
