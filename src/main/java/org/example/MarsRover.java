@@ -39,15 +39,15 @@ public class MarsRover {
                 "W", () -> x++
         );
 
-        for (char command : commands.toCharArray()) {
-            if (directionChanges.containsKey(command)) {
-                direction = directionChanges.get(command).get(direction);
+        commands.chars().forEach(command -> {
+            if (directionChanges.containsKey((char) command)) {
+                direction = directionChanges.get((char) command).get(direction);
             } else if (command == 'M') {
                 moveForward.get(direction).run();
             } else if (command == 'B') {
                 moveBackward.get(direction).run();
             }
-        }
+        });
     }
 
 
