@@ -1,5 +1,8 @@
 package org.example;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MarsRover {
 
     private int x;
@@ -18,76 +21,33 @@ public class MarsRover {
     }
 
     public void executeCommand(String commands) {
-        commands.chars()
-                .mapToObj(c -> (char) c)
-                .forEach(command -> {
-                    switch (command) {
-                        case 'L':
-                            switch (this.direction) {
-                                case "N":
-                                    this.direction = "W";
-                                    break;
-                                case "W":
-                                    this.direction = "S";
-                                    break;
-                                case "S":
-                                    this.direction = "E";
-                                    break;
-                                case "E":
-                                    this.direction = "N";
-                                    break;
-                            }
-                            break;
-                        case 'R':
-                            switch (this.direction) {
-                                case "N":
-                                    this.direction = "E";
-                                    break;
-                                case "E":
-                                    this.direction = "S";
-                                    break;
-                                case "S":
-                                    this.direction = "W";
-                                    break;
-                                case "W":
-                                    this.direction = "N";
-                                    break;
-                            }
-                            break;
-                        case 'M':
-                            switch (this.direction) {
-                                case "N":
-                                    this.y++;
-                                    break;
-                                case "E":
-                                    this.x++;
-                                    break;
-                                case "S":
-                                    this.y--;
-                                    break;
-                                case "W":
-                                    this.x--;
-                                    break;
-                            }
-                            break;
-                        case 'B':
-                            switch (this.direction) {
-                                case "N":
-                                    this.y--;
-                                    break;
-                                case "E":
-                                    this.x--;
-                                    break;
-                                case "S":
-                                    this.y++;
-                                    break;
-                                case "W":
-                                    this.x++;
-                                    break;
-                            }
-                            break;
-                    }
-                });
+        Map<Character, Map<String, String>> directionChanges = new HashMap<>();
+        directionChanges.put('L', Map.of("N", "W", "W", "S", "S", "E", "E", "N"));
+        directionChanges.put('R', Map.of("N", "E", "E", "S", "S", "W", "W", "N"));
+
+        Map<String, Runnable> moveForward = Map.of(
+                "N", () -> y++,
+                "E", () -> x++,
+                "S", () -> y--,
+                "W", () -> x--
+        );
+
+        Map<String, Runnable> moveBackward = Map.of(
+                "N", () -> y--,
+                "E", () -> x--,
+                "S", () -> y++,
+                "W", () -> x++
+        );
+
+        for (char command : commands.toCharArray()) {
+            if (directionChanges.containsKey(command)) {
+                direction = directionChanges.get(command).get(direction);
+            } else if (command == 'M') {
+                moveForward.get(direction).run();
+            } else if (command == 'B') {
+                moveBackward.get(direction).run();
+            }
+        }
     }
 
 
