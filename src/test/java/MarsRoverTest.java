@@ -137,7 +137,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_move_backward_by_one_in_y_axis_when_orient_south_and_move() {
+    public void should_move_forward_by_one_in_y_axis_when_orient_south_and_move() {
         //Given
         MarsRover rover = new MarsRover(0,0,"S");
         //When
@@ -148,7 +148,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_move_backward_by_one_in_x_axis_when_orient_west_and_move() {
+    public void should_move_forward_by_one_in_x_axis_when_orient_west_and_move() {
         //Given
         MarsRover rover = new MarsRover(0,0,"W");
         //When
