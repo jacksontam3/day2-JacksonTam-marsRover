@@ -50,6 +50,21 @@ public class MarsRover {
                         this.direction = "N";
                         break;
                 }
+            case "M":
+                switch (this.direction) {
+                    case "N":
+                        this.y++;
+                        break;
+                    case "E":
+                        this.x++;
+                        break;
+                    case "S":
+                        this.y--;
+                        break;
+                    case "W":
+                        this.x--;
+                        break;
+                }
                 break;
         }
     }
