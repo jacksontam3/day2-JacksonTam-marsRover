@@ -214,6 +214,17 @@ public class MarsRoverTest {
         assertEquals("1:0:W", report);
     }
 
+    @Test
+    public void should_move_forward_by_one_in_y_axis_when_orient_north_and_turn_right(){
+        //Given
+        MarsRover rover = new MarsRover(0,0,"N");
+        //When
+        rover.executeCommand("RM");
+        String report = rover.showStatus();
+        //Then
+        assertEquals("1:0:E", report);
+    }
+
 
 
 
