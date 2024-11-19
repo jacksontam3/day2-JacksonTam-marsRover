@@ -225,6 +225,17 @@ public class MarsRoverTest {
         assertEquals("1:0:E", report);
     }
 
+    @Test
+    public void should_ignore_invalid_command() {
+        //Given
+        MarsRover rover = new MarsRover(0, 0, "N");
+        //When
+        rover.executeCommand("X");
+        String report = rover.showStatus();
+        //Then
+        assertEquals("0:0:N", report);
+    }
+
 
 
 
