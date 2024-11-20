@@ -14,6 +14,9 @@ public  abstract class abstractCommand {
         };
     }
 
+    public abstract Direction getDirection();
+
+
 
 
 }
