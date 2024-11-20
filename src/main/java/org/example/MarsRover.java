@@ -31,15 +31,11 @@ public class MarsRover {
     public void executeCommand(String commands) {
         commands.chars()
                 .forEach(c -> {
-                    commandHandler((char) c);
+                    commonActions.execute(this, String.valueOf(c));
                 });
 
        showStatus();
     }
-
-    public void commandHandler(char currentChar){
-        commonActions.execute(this, String.valueOf(currentChar));
-        }
 
     public CommonActions getCommonActions() {
         return commonActions;
