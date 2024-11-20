@@ -11,19 +11,17 @@ public abstract class CommonActions {
             case S -> new ActionsForSouth();
             case E -> new ActionsForEast();
             case W -> new ActionsForWest();
-            default -> null;
         };
     }
 
-    public void execute(MarsRover marsRover, String command){
+    public void execute(MarsRover marsRover, String command) {
         switch (command) {
-            case "M": forward(marsRover); break;
-            case "B": backward(marsRover); break;
-            case "R": turnRight(marsRover); break;
-            case "L": turnLeft(marsRover); break;
-
+            case "M" -> forward(marsRover);
+            case "B" -> backward(marsRover);
+            case "R" -> turnRight(marsRover);
+            case "L" -> turnLeft(marsRover);
         }
-    };
+    }
 
     public abstract Direction getDirection();
 
