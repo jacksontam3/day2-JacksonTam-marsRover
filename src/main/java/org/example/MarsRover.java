@@ -31,7 +31,7 @@ public class MarsRover {
     public void executeCommand(String commands) {
         commands.chars()
                 .forEach(c -> {
-                    commonActions.execute(this, String.valueOf(c));
+                    commonActions.execute(this, String.valueOf((char) c));
                 });
 
        showStatus();
