@@ -1,54 +1,64 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.example.action.ActionsForNorth;
+import org.example.action.CommonActions;
+import org.example.constant.Direction;
 
 public class MarsRover {
 
-    private int x;
-    private int y;
-    private String direction;
+    public static final String Semicolon = ":";
+    private Coordinate coordinate;
+    private CommonActions commonActions;
+
+    public MarsRover(){
+        this.coordinate = new Coordinate();
+        setOperation(new ActionsForNorth());
+    }
+
+    private void setOperation(CommonActions abstractAction) {
+        this.commonActions = abstractAction;
+    }
 
 
-    public MarsRover(int x, int y, String direction) {
-        this.x = x;
-        this.y = y;
-        this.direction = direction;
+    public MarsRover(int x, int y, Direction direction) {
+       this.coordinate = new Coordinate(x, y);
+       setOperation(CommonActions.getCommand(direction));
     }
 
     public String showStatus() {
-        return this.x + ":" + this.y + ":" + this.direction;
+        return coordinate.getX() + Semicolon + coordinate.getY() + Semicolon + commonActions.getDirection().name();
     }
 
     public void executeCommand(String commands) {
-        Map<Character, Map<String, String>> directionChanges = new HashMap<>();
-        directionChanges.put('L', Map.of("N", "W", "W", "S", "S", "E", "E", "N"));
-        directionChanges.put('R', Map.of("N", "E", "E", "S", "S", "W", "W", "N"));
+        commands.chars()
+                .forEach(c -> {
+                    commandHandler((char) c);
+                });
 
-        Map<String, Runnable> moveForward = Map.of(
-                "N", () -> y++,
-                "E", () -> x++,
-                "S", () -> y--,
-                "W", () -> x--
-        );
-
-        Map<String, Runnable> moveBackward = Map.of(
-                "N", () -> y--,
-                "E", () -> x--,
-                "S", () -> y++,
-                "W", () -> x++
-        );
-
-        commands.chars().forEach(command -> {
-            if (directionChanges.containsKey((char) command)) {
-                direction = directionChanges.get((char) command).get(direction);
-            } else if (command == 'M') {
-                moveForward.get(direction).run();
-            } else if (command == 'B') {
-                moveBackward.get(direction).run();
-            }
-        });
+       showStatus();
     }
 
+    public void commandHandler(char currentChar){
+        commonActions.execute(this, String.valueOf(currentChar));
+        }
 
+    public CommonActions getCommonActions() {
+        return commonActions;
+    }
+
+    public void setCommonActions(CommonActions commonActions) {
+        this.commonActions = commonActions;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public void updateCoordinate(int x, int y) {
+        setCoordinate(new Coordinate(x,y));
+    }
 }
