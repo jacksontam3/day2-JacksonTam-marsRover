@@ -11,8 +11,7 @@ public class MarsRover {
     private CommonActions commonActions;
 
     public MarsRover(){
-        this.coordinate = new Coordinate();
-        setOperation(new ActionsForNorth());
+        this(0, 0, Direction.N);
     }
 
     private void setOperation(CommonActions abstractAction) {
